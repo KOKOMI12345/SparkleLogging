@@ -10,6 +10,10 @@ class LogManager:
         )
 
     def GetLogger(self, log_name: str = "default",
+                  setConsoleLevel: int = logging.DEBUG,
+                  setFileLevel: int = logging.INFO,
+                  setWebsocketLevel: int = logging.INFO,
+                  setHTTPLevel: int = logging.INFO,
                   out_to_console: bool = True,
                   web_log_mode: bool = False,
                   WSpost_url: str = "",
@@ -40,7 +44,7 @@ class LogManager:
         }
         if out_to_console:
             console_handler = logging.StreamHandler()
-            console_handler.setLevel(logging.DEBUG)
+            console_handler.setLevel(setConsoleLevel)
             console_formatter = colorlog.ColoredFormatter(
                 fmt='%(log_color)s [%(asctime)s.%(msecs)d| %(levelname)-8s |%(threadName)s|%(name)s.%(funcName)s|%(fileName)s:%(lineno)d]: %(message)s %(reset)s',
                 datefmt='%H:%M:%S',
@@ -53,12 +57,12 @@ class LogManager:
                 console_formatter = colorlog.ColoredFormatter(fmt=f"%(log_color)s {console_formatter._fmt} %(reset)s",datefmt=console_formatter.datefmt, log_colors=log_color_config)
                 console_handler.setFormatter(console_formatter)
 
-            logger.setLevel(logging.DEBUG)
+            logger.setLevel(setConsoleLevel)
             logger.addHandler(console_handler)
 
         
         file_handler = TimedRotatingFileHandler(f'./logs/{log_name}/{log_name}.log',encoding="utf-8", when='midnight', interval=1, backupCount=7)
-        file_handler.setLevel(logging.INFO)
+        file_handler.setLevel(setFileLevel)
         file_handler.setFormatter(self.public_formatter)
 
         if custom_formatter:
@@ -76,7 +80,7 @@ class LogManager:
 
         if web_log_mode and WSpost_url:
             websocket_handler = WebsocketHandler(WSpost_url)
-            websocket_handler.setLevel(logging.INFO)
+            websocket_handler.setLevel(setWebsocketLevel)
             formatter = self.public_formatter
             if custom_formatter:
                 formatter = custom_formatter
@@ -87,14 +91,14 @@ class LogManager:
             # 检查代码是否在异步环境中运行
             if asyncio.iscoroutinefunction(logging.Handler.emit):
                 async_http_hander = AsyncHTTPhandler(HTTPpost_url)
-                async_http_hander.setLevel(logging.INFO)
+                async_http_hander.setLevel(setHTTPLevel)
                 formatter = self.public_formatter
                 if custom_formatter:
                     formatter = custom_formatter
                 async_http_hander.setFormatter(formatter)
                 logger.addHandler(async_http_hander)
             http_handler = HTTPhandler(HTTPpost_url)
-            http_handler.setLevel(logging.INFO)
+            http_handler.setLevel(setHTTPLevel)
             formatter = self.public_formatter
             if custom_formatter:
                 formatter = custom_formatter
