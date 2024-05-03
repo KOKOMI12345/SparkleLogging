@@ -62,3 +62,15 @@ logger.warning('这是一个警告信息')
 - `setWebLevel`: 设置websocket日志输出级别,默认INFO
 - `setHttpLevel`: 设置http日志输出级别,默认INFO
 - `custom_fomatter`: 自定义格式化函数,默认None
+
+# 2024/5/3 1:05
+
+更新了一个默认日志记录器
+
+# 2024/5/3 1:17
+
+修复了一个bug
+
+# 2024/5/3 11:54
+
+更改了core.py文件,让其导入可以直接使用
