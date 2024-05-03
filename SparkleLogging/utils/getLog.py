@@ -1,13 +1,14 @@
 from SparkleLogging.utils.plugins_for_core import *
 
-FOMATTER = '[%(asctime)s.%(msecs)d| %(levelname)-8s |%(threadName)s|%(name)s.%(funcName)s|%(filename)s:%(lineno)d]: %(message)s'
+# 建议不要改这个地方
+DEFAUIT_FOMATTER = logging.Formatter(
+    fmt='[%(asctime)s.%(msecs)d| %(levelname)-8s |%(threadName)s|%(name)s.%(funcName)s|%(filename)s:%(lineno)d]: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 class LogManager:
     def __init__(self) -> None:
-        self.public_formatter = logging.Formatter(
-            fmt='[%(asctime)s.%(msecs)d| %(levelname)-8s |%(threadName)s|%(name)s.%(funcName)s|%(filename)s:%(lineno)d]: %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )
+        self.public_formatter = DEFAUIT_FOMATTER
 
     def GetLogger(self, log_name: str = "default",
                   setConsoleLevel: int = logging.DEBUG,
@@ -19,10 +20,8 @@ class LogManager:
                   WSpost_url: str = "",
                   HTTPpost_url: str = "",
                   http_mode: bool = False,
-                  custom_formatter: logging.Formatter = logging.Formatter(
-            fmt='[%(asctime)s.%(msecs)d| %(levelname)-8s |%(threadName)s|%(name)s.%(funcName)s|%(filename)s:%(lineno)d]: %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )):
+                  custom_formatter: logging.Formatter = DEFAUIT_FOMATTER
+        ):
         # 确保日志名称有效
         log_name = log_name if log_name else "default"
         if out_to_console:
