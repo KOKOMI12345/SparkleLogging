@@ -7,10 +7,10 @@ DEFAUIT_FOMATTER = logging.Formatter(
 )
 
 class LogManager:
-    def __init__(self) -> None:
-        self.public_formatter = DEFAUIT_FOMATTER
+    public_formatter = DEFAUIT_FOMATTER
 
-    def GetLogger(self, log_name: str = "default",
+    @classmethod
+    def GetLogger(cls, log_name: str = "default",
                   setConsoleLevel: int = logging.DEBUG,
                   setFileLevel: int = logging.INFO,
                   setWebsocketLevel: int = logging.INFO,
@@ -62,7 +62,7 @@ class LogManager:
         
         file_handler = TimedRotatingFileHandler(f'./logs/{log_name}/{log_name}.log',encoding="utf-8", when='midnight', interval=1, backupCount=7)
         file_handler.setLevel(setFileLevel)
-        file_handler.setFormatter(self.public_formatter)
+        file_handler.setFormatter(cls.public_formatter)
 
         if custom_formatter:
             file_handler.setFormatter(custom_formatter)
@@ -80,7 +80,7 @@ class LogManager:
         if web_log_mode and WSpost_url:
             websocket_handler = WebsocketHandler(WSpost_url)
             websocket_handler.setLevel(setWebsocketLevel)
-            formatter = self.public_formatter
+            formatter = cls.public_formatter
             if custom_formatter:
                 formatter = custom_formatter
             websocket_handler.setFormatter(formatter)
@@ -91,14 +91,14 @@ class LogManager:
             if asyncio.iscoroutinefunction(logging.Handler.emit):
                 async_http_hander = AsyncHTTPhandler(HTTPpost_url)
                 async_http_hander.setLevel(setHTTPLevel)
-                formatter = self.public_formatter
+                formatter = cls.public_formatter
                 if custom_formatter:
                     formatter = custom_formatter
                 async_http_hander.setFormatter(formatter)
                 logger.addHandler(async_http_hander)
             http_handler = HTTPhandler(HTTPpost_url)
             http_handler.setLevel(setHTTPLevel)
-            formatter = self.public_formatter
+            formatter = cls.public_formatter
             if custom_formatter:
                 formatter = custom_formatter
             http_handler.setFormatter(formatter)

@@ -13,14 +13,14 @@
 from SparkleLogging.utils.core import LogManager
 from logging import Formatter
 
-logger = LogManager().GetLogger(
+logger = LogManager.GetLogger(
     log_name='example',
     out_to_console=True,
     web_log_mode=True,
     WSpost_url='ws://localhost:8765',
     HTTPpost_url='http://localhost:8765',
     http_mode = True,
-    custom_fomatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',datefmt="%H:%M:%S")
+    custom_formatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',datefmt="%H:%M:%S")
 )
 
 logger.info('这是一个成功信息')
