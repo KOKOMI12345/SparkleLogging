@@ -1,4 +1,0 @@
-websockets
-httpx
-colorlog
-requests
