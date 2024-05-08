@@ -19,8 +19,8 @@ logger = LogManager.GetLogger(
     web_log_mode=True,
     WSpost_url='ws://localhost:8765',
     HTTPpost_url='http://localhost:8765',
-    http_mode = True,
-    custom_fomatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',datefmt="%H:%M:%S")
+    http_mode=True,
+    custom_formatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt="%H:%M:%S")
 )
 
 logger.info('这是一个成功信息')
