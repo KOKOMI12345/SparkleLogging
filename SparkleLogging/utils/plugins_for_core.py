@@ -7,3 +7,4 @@ from logging.handlers import QueueHandler, QueueListener
 from SparkleLogging.plugins.websocketHander import WebsocketHandler
 from SparkleLogging.plugins.HttpHander import HTTPhandler , AsyncHTTPhandler
 from SparkleLogging.plugins.DecoratorsTools import *
+from SparkleLogging.plugins.exclogger import ExceptionLogger
