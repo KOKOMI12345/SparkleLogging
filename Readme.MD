@@ -19,8 +19,8 @@ logger = LogManager.GetLogger(
     web_log_mode=True,
     WSpost_url='ws://localhost:8765',
     HTTPpost_url='http://localhost:8765',
-    http_mode=True,
-    custom_formatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt="%H:%M:%S")
+    http_mode = True,
+    custom_fomatter=Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',datefmt="%H:%M:%S")
 )
 
 logger.info('这是一个成功信息')
@@ -45,6 +45,10 @@ logger.warning('这是一个警告信息')
 - `custom_fomatter`: 自定义格式化函数,默认None
 
 ## 更新日志
+
+# 2024/5/18 19:24
+
+更新了不同的堆栈格式和方便使用的装饰器
 
 # 2024/2/20 1:01
 
