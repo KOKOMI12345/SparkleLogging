@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='SparkleLogging',
-    version='1.0.8',
+    version='1.1.0',
     packages=find_packages(),
     author='花火official',
     author_email='3072252442@qq.com',

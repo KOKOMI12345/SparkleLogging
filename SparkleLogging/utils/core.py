@@ -1,4 +1,4 @@
-from SparkleLogging.utils.getLog import LogManager ,DEFAUIT_FOMATTER
+from SparkleLogging.utils._logger import LogManager ,DEFAUIT_FOMATTER
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL,FATAL ,Formatter
 
 # 默认的日志记录器
